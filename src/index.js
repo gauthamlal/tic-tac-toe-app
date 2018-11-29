@@ -36,33 +36,44 @@ class Board extends React.Component {
   renderSquare(i) {
     return (
       <Square
+        key={i}
         value={this.props.squares[i]}
         onClick={ () => this.props.onClick(i)}
       />
     );
   }
 
+  createBoard() {
+    let completeBoard = [];
+    for (let i = 0; i < 3; i++) {
+      let row = [];
+      for (let j = 0; j < 3; j++) {
+        row.push(this.renderSquare(j + i * 3));
+      }
+      completeBoard.push(<div key={i} className="board-row">{row}</div>);
+    }
+    return completeBoard;
+  }
+
   render() {
     return (
-      <div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
+      <div>{this.createBoard()}</div>
     );
   }
+  // using Array.Map
+  /*<div>
+    {
+      [0, 1, 2].map( i1 => {
+        return (
+          <div key={i1} className="board-row">
+            {
+              [0, 1, 2].map( i2 => this.renderSquare(i2 + i1 * 3))
+            }
+          </div>
+        );
+      })
+    }
+  </div>*/
 }
 
 class Game extends React.Component {
