@@ -32,6 +32,15 @@ ol, ul {
   width: 34px;
 }
 
+.active-button {
+  color: white;
+  background-color: black;
+}
+
+.active-button:focus {
+  outline: 0;
+}
+
 .square:focus {
   outline: none;
 }
